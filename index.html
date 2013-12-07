@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="PHP-MCE : PHP Multi-Class-Extension Architecture" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>PHP-MCE</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/sourcerer-mike/PHP-MCE">View on GitHub</a>
+
+          <h1 id="project_title">PHP-MCE</h1>
+          <h2 id="project_tagline">PHP Multi-Class-Extension Architecture</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/sourcerer-mike/PHP-MCE/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/sourcerer-mike/PHP-MCE/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="php-mce" class="anchor" href="#php-mce"><span class="octicon octicon-link"></span></a>PHP-MCE</h1>
+
+<p>PHP Multi-Class-Extension Architecture can be <a href="https://github.com/sourcerer-mike/php-mce">found on GitHub</a>.</p>
+
+<p>Take down the limits of <code>class ... extends ...</code> to extend with multiple classes instead of only one.</p>
+
+<p>For example you extend <code>\Foo</code> by two plugins:</p>
+
+<pre><code>├── Base
+│   └── Foo
+├── PluginOne
+│   └── Foo
+└── PluginTwo
+    └── Foo
+</code></pre>
+
+<ul>
+<li>PluginOne will make it <code>PluginOne\Foo</code> extending the default <code>\Base\Foo</code>.</li>
+<li>PluginTwo will make it <code>PluginTwo\Foo</code> extending the previous state (here: PluginOne).</li>
+</ul><p>Until now this is almost done like that:</p>
+
+<pre><code>/*
+ * First extension
+ */
+require_once 'PluginOne/Foo.php';
+
+// enable the following line to have \PluginOne\Foo instead of \Base\Foo
+\Registry::getLoader()-&gt;setClassAlias('Foo', '\PluginOne\Foo');
+
+/*
+ * Second extension
+ */
+require_once 'PluginTwo/Foo.php';
+
+// enable the next to even extend it twice and use \PluginTwo\Foo
+\Registry::getLoader()-&gt;setClassAlias('Foo', '\PluginTwo\Foo');
+
+$foo = new \Foo();
+echo get_class($foo), PHP_EOL;
+echo $foo-&gt;bar(), PHP_EOL;
+</code></pre>
+
+<p><a href="https://github.com/sourcerer-mike/php-mce">Take a look at it on GitHub now!</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">PHP-MCE maintained by <a href="https://github.com/sourcerer-mike">sourcerer-mike</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-46278774-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
